@@ -26,6 +26,8 @@
             };
         }
 
+        public static string AppTitle => "Windows定时关机助手";
+
         private TimeSpan _interval;
         public TimeSpan Interval
         {

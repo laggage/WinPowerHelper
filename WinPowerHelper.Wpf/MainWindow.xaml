@@ -8,8 +8,9 @@
         xmlns:models="clr-namespace:WinPowerHelper.Core.Models;assembly=WinPowerHelper.Core" 
         xmlns:extensions="clr-namespace:WinPowerHelper.Wpf.Extensions"
         mc:Ignorable="d"
-        Title="MainWindow" Height="240" Width="420" 
-        DataContext="{StaticResource MainViewModel}">
+        DataContext="{StaticResource MainViewModel}"
+        Title="{Binding AppTitle}" Height="240" Width="420" 
+        >
     <Window.Resources>
         <extensions:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
         <extensions:BoolNotConverter x:Key="BoolNotConverter" />
