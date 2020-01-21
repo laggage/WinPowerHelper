@@ -158,7 +158,7 @@
 
         #region Implement INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
-        internal void Set<T>(ref T value, T newValue, [CallerMemberName]string propertyName = "")
+        internal protected void Set<T>(ref T value, T newValue, [CallerMemberName]string propertyName = "")
         {
             value = newValue;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
