@@ -126,11 +126,7 @@
                         Interval = Interval.Subtract(TimeSpan.FromSeconds(1));
                         if (Interval.TotalSeconds <= 0)
                         {
-                            _timer?.Stop();
-                            _timer?.Dispose();
-                            _timer = null;
-                            Interval = default;
-                            IsTiming = false;
+                            StopTiming();
                             TimingOver?.Invoke(this, null);
                         }
                     }), null);
@@ -149,6 +145,7 @@
             IsTiming = false;
             _timer?.Stop();
             _timer?.Dispose();
+            _timer = null;
             Dispatcher.Invoke(
                 new Action(() =>
                 {
