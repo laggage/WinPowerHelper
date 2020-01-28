@@ -8,8 +8,9 @@
         xmlns:extensions="clr-namespace:WinPowerHelper.Wpf.Extensions"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="{Binding AppTitle}" MinHeight="240" MinWidth="420" Width="500" Height="240" MaxHeight="400" MaxWidth="680"
-        >
+        Title="{Binding AppTitle}" 
+        MinHeight="240" MinWidth="420" Width="500" Height="240" 
+        MaxHeight="400" MaxWidth="680" ResizeMode="CanMinimize">
     <Window.Resources>
         <extensions:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
         <extensions:BoolNotConverter x:Key="BoolNotConverter" />
@@ -23,13 +24,13 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <views:TimerControl x:Name="timer" 
+                            Padding="12 3"
                             Interval="{Binding Path=Interval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></views:TimerControl>
         <Border Grid.Row="1">
             <WrapPanel HorizontalAlignment="Center">
                 <WrapPanel.Resources>
-                    <Style TargetType="Button">
+                    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button.Square.Accent}">
                         <Setter Property="Margin" Value="0 3 8 3"/>
-                        <Setter Property="Padding" Value="5 3"/>
                         <Setter Property="IsEnabled" Value="{Binding ElementName=timer, Path=IsTiming, Converter={StaticResource BoolNotConverter}}"/>
                         <Setter Property="Command" Value="{Binding SetIntervalCmd}"/>
                     </Style>
@@ -45,8 +46,8 @@
                         Command="{Binding SetIntervalToZeroCmd}">set to zero</Button>
             </WrapPanel>
         </Border>
-        <Border Grid.Row="2">
-            <Grid Margin="12 3">
+        <Border Grid.Row="2" Padding="12 3">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
@@ -63,11 +64,12 @@
                 </ComboBox>
             </Grid>
         </Border>
-        <Border Grid.Row="3">
-            <Button Margin="12 3" Padding="0 3" 
-                        Command="{Binding BeginOrStopTimingCmd}"
-                        CommandParameter="{Binding ElementName=timer}"
-                        Content="{Binding ElementName=timer, Path=IsTiming, Converter={StaticResource BoolToStringConverter}, ConverterParameter='取消;开始'}"/>
+        <Border Grid.Row="3" Padding="12 3">
+            <Button Padding="0 3" 
+                    Command="{Binding BeginOrStopTimingCmd}"
+                    CommandParameter="{Binding ElementName=timer}"
+                    Style="{StaticResource Button.Square.Accent}"
+                    Content="{Binding ElementName=timer, Path=IsTiming, Converter={StaticResource BoolToStringConverter}, ConverterParameter='取消;开始', FallbackValue='开始'}"/>
         </Border>
     </Grid>
 </Window>
