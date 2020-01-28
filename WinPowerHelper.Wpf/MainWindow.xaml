@@ -9,12 +9,13 @@
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
         Title="{Binding AppTitle}" 
-        MinHeight="240" MinWidth="420" Width="500" Height="240" 
+        MinHeight="240" MinWidth="420" Width="500" Height="250"
         MaxHeight="400" MaxWidth="680" ResizeMode="CanMinimize">
     <Window.Resources>
         <extensions:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
         <extensions:BoolNotConverter x:Key="BoolNotConverter" />
         <extensions:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -46,30 +47,39 @@
                         Command="{Binding SetIntervalToZeroCmd}">set to zero</Button>
             </WrapPanel>
         </Border>
-        <Border Grid.Row="2" Padding="12 3">
+        <Border Grid.Row="2" Padding="12 5">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" Text="模式:"/>
-                <ComboBox Grid.Column="1" SelectedIndex="0" 
+                <TextBlock Margin="0 0 12 0" 
+                           VerticalAlignment="Center" 
+                           FontWeight="SemiBold"
+                           Text="模式:"
+                           FontSize="13"/>
+                <ComboBox Grid.Column="1" 
+                          Margin="0 0 12 0"
+                          SelectedIndex="0" 
                           ItemsSource="{Binding PowerOptions}" 
-                          SelectedValue="{Binding SelectedPowerOption, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                          Style="{StaticResource ComboBox}"
+                          SelectedValue="{Binding SelectedPowerOption, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, FallbackValue=Sleep}" 
+                          IsEditable="False"                          
+                          ItemContainerStyle="{StaticResource ComboBoxItem.Accent}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:PowerOptions}" >
-                            <TextBlock Text="{Binding Path=.,  Converter={StaticResource EnumDescriptionConverter}}"></TextBlock>
+                            <TextBlock Text="{Binding Path=.,  Converter={StaticResource EnumDescriptionConverter}}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-            </Grid>
-        </Border>
-        <Border Grid.Row="3" Padding="12 3">
-            <Button Padding="0 3" 
+
+                <Button Padding="0 8" Grid.Column="2"
                     Command="{Binding BeginOrStopTimingCmd}"
                     CommandParameter="{Binding ElementName=timer}"
                     Style="{StaticResource Button.Square.Accent}"
                     Content="{Binding ElementName=timer, Path=IsTiming, Converter={StaticResource BoolToStringConverter}, ConverterParameter='取消;开始', FallbackValue='开始'}"/>
+            </Grid>
         </Border>
     </Grid>
 </Window>

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             d:DesignHeight="180" d:DesignWidth="480"
+             mc:Ignorable="d"  d:DesignWidth="480"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime" 
              x:Name="timespan">
     <UserControl.Resources>
+        <system:Double x:Key="NumberUnit.FontSize">96</system:Double>
         <Path x:Key="circle" Fill="Black" 
               VerticalAlignment="Center"
               HorizontalAlignment="Center"
@@ -34,14 +35,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Text="{Binding ElementName=timespan, UpdateSourceTrigger=PropertyChanged, Path=Hour1, FallbackValue=0}"/>
         </Border>
         <Border Grid.Column="1">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -49,7 +50,7 @@
                        Text="{Binding ElementName=timespan, UpdateSourceTrigger=PropertyChanged, Path=Hour0, FallbackValue=2}"/>
         </Border>
         <Border Grid.Column="2">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -57,30 +58,17 @@
                        TextAlignment="Center"
 
                        Text=":"/>
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <Border Grid.Row="0" Child="{StaticResource circle}">
-                    
-                </Border>
-                <Border Grid.Row="1" Child="{StaticResource circle}">
-
-                </Border>
-            </Grid>-->
         </Border>
 
         <Border Grid.Column="3">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Text="{Binding ElementName=timespan, Path=Minute1, UpdateSourceTrigger=PropertyChanged, FallbackValue=0}"/>
         </Border>
         <Border Grid.Column="4">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -88,7 +76,7 @@
         </Border>
 
         <Border Grid.Column="5">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -99,7 +87,7 @@
         </Border>
 
         <Border Grid.Column="6">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -107,7 +95,7 @@
         </Border>
 
         <Border Grid.Column="7">
-            <TextBlock FontSize="96" 
+            <TextBlock FontSize="{StaticResource NumberUnit.FontSize}" 
                        FontWeight="ExtraBold"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
