@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>cb89p-4nv71-003.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -11,8 +12,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="cb89p-4nv71-003.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
@@ -20,6 +25,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WinPowerHelper.Core\WinPowerHelper.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="cb89p-4nv71-003.ico" />
   </ItemGroup>
 
 </Project>
