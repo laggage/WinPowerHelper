@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary  Source="pack://application:,,,/Styles/Controls.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Styles/Themes/Light.Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Styles/Themes/Light.Pink.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <viewmodels:MainViewModel x:Key="MainViewModel"/>
