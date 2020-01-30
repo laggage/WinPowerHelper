@@ -6,7 +6,7 @@
                     mc:Ignorable="options">
 
   <system:String x:Key="Theme.Name">Light.Pink</system:String>
-  <system:String x:Key="Them.DisplayName">Pink (Light)</system:String>
+  <system:String x:Key="Theme.DisplayName">Pink (Light)</system:String>
   <system:String x:Key="Theme.BaseColorScheme">Light</system:String>
   <system:String x:Key="Theme.ColorScheme">Pink</system:String>
   <SolidColorBrush x:Key="Theme.ShowcaseBrush" Color="#FFF472D0" options:Freeze="True" />

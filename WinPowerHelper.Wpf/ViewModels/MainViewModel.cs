@@ -9,6 +9,9 @@
     using WinPowerHelper.Core.Models;
     using WinPowerHelper.Core.Services;
     using WinPowerHelper.Wpf.Views;
+    using ThemeManager;
+    using System.Windows;
+    using System.Linq;
 
     internal class MainViewModel : BindableBase
     {
@@ -24,6 +27,11 @@
                 Core.Models.PowerOptions.Shutdown,
                 Core.Models.PowerOptions.Restart,
             };
+            Themes = ThemeManager.Themes;
+            SelectedTheme =
+                Themes.FirstOrDefault(
+                    x => x.ColorScheme.Contains(
+                        "blue", StringComparison.OrdinalIgnoreCase));
         }
 
         public static string AppTitle => "Windows定时关机助手";
@@ -35,8 +43,20 @@
             set => SetProperty(ref _interval, value);
         }
 
+        public IList<Theme> Themes { get; set; }
         public List<PowerOptions> PowerOptions { get; set; }
         public PowerOptions SelectedPowerOption { get; set; }
+
+        private Theme _selectedTheme;
+        public Theme SelectedTheme
+        {
+            get => _selectedTheme;
+            set
+            {
+                SetProperty(ref _selectedTheme, value);
+                ThemeManager.ChangeThemeColorScheme(Application.Current.Resources, value.ColorScheme);
+            }
+        }
 
         public ICommand SetIntervalCmd { get; private set; }
         public ICommand SetIntervalToZeroCmd { get; private set; }

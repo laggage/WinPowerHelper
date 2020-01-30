@@ -21,7 +21,7 @@
         public const string ThemeNameKey = "Theme.Name";
         public const string ThemeDisplayNameKey = "Theme.DisplayName";
         public const string ThemeBaseColorSchemeKey = "Theme.BaseColorScheme";
-        public const string ThemeColorSchemeKey = "Theme.ColorSchema";
+        public const string ThemeColorSchemeKey = "Theme.ColorScheme";
         public const string ThemeShowcaseBrushKey = "Theme.ShowcaseBrush";
 
         public string Name { get; set; }

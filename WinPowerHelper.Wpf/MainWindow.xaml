@@ -8,26 +8,38 @@
         xmlns:extensions="clr-namespace:WinPowerHelper.Wpf.Extensions"
         mc:Ignorable="d"
         DataContext="{StaticResource MainViewModel}"
-        Title="{Binding AppTitle}" 
-        MinHeight="240" MinWidth="420" Width="500" Height="250"
-        MaxHeight="400" MaxWidth="680" ResizeMode="CanMinimize">
+        Title="{Binding AppTitle}" WindowStyle="None"
+        MinHeight="240" MinWidth="420" Width="500" Height="200"
+        BorderThickness="1" 
+        MaxHeight="400" MaxWidth="680" ResizeMode="CanMinimize" BorderBrush="{DynamicResource Brushes.Accent}">
     <Window.Resources>
         <extensions:EnumDescriptionConverter x:Key="EnumDescriptionConverter" />
         <extensions:BoolNotConverter x:Key="BoolNotConverter" />
         <extensions:BoolToStringConverter x:Key="BoolToStringConverter"/>
+        <Style x:Key="WindowStyle1" TargetType="{x:Type Window}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <views:WindowTitleBar x:Name="TitleBar"/>
         <views:TimerControl x:Name="timer" 
+                            Grid.Row="1"
                             Padding="12 3"
                             Interval="{Binding Path=Interval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></views:TimerControl>
-        <Border Grid.Row="1">
+        <Border Grid.Row="2">
             <WrapPanel HorizontalAlignment="Center">
                 <WrapPanel.Resources>
                     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button.Square.Accent}">
@@ -47,7 +59,7 @@
                         Command="{Binding SetIntervalToZeroCmd}">set to zero</Button>
             </WrapPanel>
         </Border>
-        <Border Grid.Row="2" Padding="12 5">
+        <Border Grid.Row="3" Padding="12 5">
             <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -65,8 +77,7 @@
                           ItemsSource="{Binding PowerOptions}" 
                           Style="{StaticResource ComboBox}"
                           SelectedValue="{Binding SelectedPowerOption, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, FallbackValue=Sleep}" 
-                          IsEditable="False"                          
-                          ItemContainerStyle="{StaticResource ComboBoxItem.Accent}">
+                          IsEditable="False" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:PowerOptions}" >
                             <TextBlock Text="{Binding Path=.,  Converter={StaticResource EnumDescriptionConverter}}"/>
