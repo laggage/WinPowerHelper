@@ -66,7 +66,6 @@
                         if (resourceDictionary != null && 
                             resourceDictionary.MergedDictionaries.Count == 0)
                             _themes.Add(new Theme(resourceDictionary));
-
                     }
                 }
             }

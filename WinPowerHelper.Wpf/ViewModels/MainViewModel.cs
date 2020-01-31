@@ -12,9 +12,12 @@
     using ThemeManager;
     using System.Windows;
     using System.Linq;
+    using WinPowerHelper.Wpf.Services;
 
     internal class MainViewModel : BindableBase
     {
+        private const string DefaultThemeName = "Light.Blue";
+
         public MainViewModel()
         {
             SetIntervalCmd = new DelegateCommand<string>(SetInterval);
@@ -27,11 +30,32 @@
                 Core.Models.PowerOptions.Shutdown,
                 Core.Models.PowerOptions.Restart,
             };
+            
+            InitializeTheme();
+        }
+
+        private void InitializeTheme()
+        {
             Themes = ThemeManager.Themes;
+
+            string selectedThemeName = null;
+            try
+            {
+                selectedThemeName = AppSetting.Instance.ThemeName;
+                if (string.IsNullOrEmpty(selectedThemeName))
+                    throw new Exception();
+            }
+            catch
+            {
+                selectedThemeName = DefaultThemeName;
+                AppSetting.Instance.ThemeName = selectedThemeName;
+                AppSetting.SaveSettings();
+            }
+
             SelectedTheme =
                 Themes.FirstOrDefault(
-                    x => x.ColorScheme.Contains(
-                        "blue", StringComparison.OrdinalIgnoreCase));
+                    x => x.Name.Equals(
+                        selectedThemeName, StringComparison.OrdinalIgnoreCase));
         }
 
         public static string AppTitle => "Windows定时关机助手";
@@ -55,6 +79,8 @@
             {
                 SetProperty(ref _selectedTheme, value);
                 ThemeManager.ChangeThemeColorScheme(Application.Current.Resources, value.ColorScheme);
+                AppSetting.Instance.ThemeName = value.Name;
+                AppSetting.SaveSettingsAsync();
             }
         }
 
