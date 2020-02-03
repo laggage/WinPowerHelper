@@ -73,10 +73,9 @@
                            FontSize="13"/>
                 <ComboBox Grid.Column="1" 
                           Margin="0 0 12 0"
-                          SelectedIndex="0" 
                           ItemsSource="{Binding PowerOptions}" 
                           Style="{StaticResource ComboBox}"
-                          SelectedValue="{Binding SelectedPowerOption, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, FallbackValue=Sleep}" 
+                          SelectedValue="{Binding SelectedPowerOption, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, FallbackValue=Sleep}" 
                           IsEditable="False" >
                     <ComboBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:PowerOptions}" >

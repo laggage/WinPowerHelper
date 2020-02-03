@@ -3,6 +3,7 @@
     using System.IO;
     using System.Text.Json;
     using System.Threading.Tasks;
+    using WinPowerHelper.Core.Models;
 
     internal class AppSetting
     {
@@ -13,6 +14,7 @@
         public const string SettingFileName = "appSettings.json";
 
         public string ThemeName { get; set; }
+        public PowerOptions PowerOption { get; set; }
 
         private static object _syncRoot = new object();
         private static AppSetting _instance;
@@ -24,6 +26,7 @@
                     lock(_syncRoot)
                         if (_instance == null)
                         {
+                            if (!File.Exists(SettingFileName)) File.Create(SettingFileName);
                             string json = File.ReadAllText(SettingFileName);
                             if (string.IsNullOrEmpty(json)) json = "{}";
                             _instance = JsonSerializer.Deserialize<AppSetting>(json);

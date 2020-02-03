@@ -30,14 +30,12 @@
                 Core.Models.PowerOptions.Shutdown,
                 Core.Models.PowerOptions.Restart,
             };
-            
-            InitializeTheme();
+            Themes = ThemeManager.Themes;
+            InitializeAppSettings();
         }
 
-        private void InitializeTheme()
+        private void InitializeAppSettings()
         {
-            Themes = ThemeManager.Themes;
-
             string selectedThemeName = null;
             try
             {
@@ -49,13 +47,20 @@
             {
                 selectedThemeName = DefaultThemeName;
                 AppSetting.Instance.ThemeName = selectedThemeName;
-                AppSetting.SaveSettings();
             }
 
             SelectedTheme =
                 Themes.FirstOrDefault(
                     x => x.Name.Equals(
                         selectedThemeName, StringComparison.OrdinalIgnoreCase));
+            SelectedPowerOption = AppSetting.Instance.PowerOption;
+
+            Application.Current.Exit += (s, args) =>
+            {
+                AppSetting.Instance.PowerOption = SelectedPowerOption;
+                AppSetting.Instance.ThemeName = SelectedTheme.Name;
+                AppSetting.SaveSettings();
+            };
         }
 
         public static string AppTitle => "Windows定时关机助手";
@@ -79,8 +84,6 @@
             {
                 SetProperty(ref _selectedTheme, value);
                 ThemeManager.ChangeThemeColorScheme(Application.Current.Resources, value.ColorScheme);
-                AppSetting.Instance.ThemeName = value.Name;
-                AppSetting.SaveSettingsAsync();
             }
         }
 
