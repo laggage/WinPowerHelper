@@ -33,10 +33,4 @@
     <Resource Include="Views\cb89p-4nv71-003.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

@@ -26,7 +26,11 @@
                     lock(_syncRoot)
                         if (_instance == null)
                         {
-                            if (!File.Exists(SettingFileName)) File.Create(SettingFileName);
+                            if (!File.Exists(SettingFileName))
+                            {
+                                using var fs = File.Create(SettingFileName);
+                                fs.Close();
+                            }
                             string json = File.ReadAllText(SettingFileName);
                             if (string.IsNullOrEmpty(json)) json = "{}";
                             _instance = JsonSerializer.Deserialize<AppSetting>(json);
